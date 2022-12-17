@@ -1,0 +1,145 @@
+digraph tm {
+    graph [
+        fontname = Arial;
+        fontsize = 14;
+    ]
+    node [
+        fontname = Arial;
+        fontsize = 14;
+        rankdir = lr;
+    ]
+    edge [
+        shape = none;
+        arrowtail = onormal;
+        fontname = Arial;
+        fontsize = 12;
+    ]
+    labelloc = "t";
+    fontsize = 20;
+    nodesep = 1;
+
+    subgraph cluster_boundary_UserWeb_acf3059e70 {
+        graph [
+            fontsize = 10;
+            fontcolor = firebrick2;
+            style = dashed;
+            color = firebrick2;
+            label = <<i>User/Web</i>>;
+        ]
+
+        actor_User_579e9aae81 [
+            shape = square;
+            color = black;
+            fontcolor = black;
+            label = <
+                <table border="0" cellborder="0" cellpadding="2">
+                    <tr><td><b>User</b></td></tr>
+                </table>
+            >;
+        ]
+
+    }
+
+    subgraph cluster_boundary_WebDB_88f2d9c06f {
+        graph [
+            fontsize = 10;
+            fontcolor = firebrick2;
+            style = dashed;
+            color = firebrick2;
+            label = <<i>Web/DB</i>>;
+        ]
+
+        datastore_SQLDatabase_d2006ce1bb [
+            shape = none;
+            color = grey69;
+            fontcolor = grey69;
+            label = <
+                <table sides="TB" cellborder="0" cellpadding="2">
+                    <tr><td><b>SQL Database (*)</b></td></tr>
+                </table>
+            >;
+        ]
+
+        lambda_cleanDBeveryhours_f8af758679 [
+            shape = none;
+            fixedsize = shape;
+            image = "/Users/rm/opt/anaconda3/envs/i3/lib/python3.8/site-packages/pytm/images/lambda.png";
+            imagescale = true;
+            color = black;
+            fontcolor = black;
+            label = <
+                <table border="0" cellborder="0" cellpadding="2">
+                    <tr><td><b>cleanDBevery6hours</b></td></tr>
+                </table>
+            >;
+        ]
+
+    }
+
+    server_WebServer_f2eb7a3ff7 [
+        shape = circle;
+        color = black;
+        fontcolor = black;
+        label = <
+            <table border="0" cellborder="0" cellpadding="2">
+                <tr><td><b>Web Server</b></td></tr>
+            </table>
+        >;
+    ]
+
+    lambda_cleanDBeveryhours_f8af758679 -> datastore_SQLDatabase_d2006ce1bb [
+        color = black;
+        fontcolor = black;
+        dir = forward;
+        label = <
+            <table border="0" cellborder="0" cellpadding="2">
+                <tr><td><font color="black"><b>(1) (&lambda;)Peri<br/>odically cleans DB</b></font></td></tr>
+            </table>
+        >;
+    ]
+
+    actor_User_579e9aae81 -> server_WebServer_f2eb7a3ff7 [
+        color = black;
+        fontcolor = black;
+        dir = forward;
+        label = <
+            <table border="0" cellborder="0" cellpadding="2">
+                <tr><td><font color="black"><b>(2) User enters<br/>comments (*)</b></font></td></tr>
+            </table>
+        >;
+    ]
+
+    server_WebServer_f2eb7a3ff7 -> actor_User_579e9aae81 [
+        color = black;
+        fontcolor = black;
+        dir = forward;
+        label = <
+            <table border="0" cellborder="0" cellpadding="2">
+                <tr><td><font color="black"><b>(3) Comments saved<br/>(*)</b></font></td></tr>
+            </table>
+        >;
+    ]
+
+    server_WebServer_f2eb7a3ff7 -> datastore_SQLDatabase_d2006ce1bb [
+        color = black;
+        fontcolor = black;
+        dir = forward;
+        label = <
+            <table border="0" cellborder="0" cellpadding="2">
+                <tr><td><font color="black"><b>(4) Insert query<br/>with comments</b></font></td></tr>
+            </table>
+        >;
+    ]
+
+    datastore_SQLDatabase_d2006ce1bb -> server_WebServer_f2eb7a3ff7 [
+        color = black;
+        fontcolor = black;
+        dir = forward;
+        label = <
+            <table border="0" cellborder="0" cellpadding="2">
+                <tr><td><font color="black"><b>(5) Comments<br/>contents</b></font></td></tr>
+            </table>
+        >;
+    ]
+
+}

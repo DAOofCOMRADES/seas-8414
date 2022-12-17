@@ -4,7 +4,7 @@ setup:
 	pip3 install streamlit
 
 run:
-	streamlit run app.py --server.address 0.0.0.0 --server.port 8888
+	streamlit run app.py --server.address 0.0.0.0 --server.port 9999
 
 splunk:
 	docker run -d -v $(pwd):/data/ -p 80:8000 -e "SPLUNK_START_ARGS=--accept-license" -e "SPLUNK_PASSWORD=Admin321" --name splunk splunk/splunk:latest
