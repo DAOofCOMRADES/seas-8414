@@ -22,7 +22,7 @@ h3:
 
 demo:
 	cd pytm && mkdir -p sample	
-	cd pytm && python ./tm.py --dfd | dot -Tpng -o ../sample/dfd.png
+	cd pytm && python ./tm.py --dfd | dot -Tpng -o sample/dfd.png
 	cd pytm && python ./tm.py --seq | java -Djava.awt.headless=true -jar ../plantuml.jar -tpng -pipe > sample/seq.png
 	cd pytm && python ./tm.py --report ../docs/template.md | pandoc -f markdown -t html > sample/report.html 2>/dev/null
 	cd pytm && open sample/report.html
